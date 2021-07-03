@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 export function ItemContato(props){ 
     
@@ -7,6 +8,10 @@ export function ItemContato(props){
         <View style={styles.container}>
             <Text style={styles.textContact}>Nome: {props.nome}</Text>
             <Text>Telefone: {props.phone}</Text>
+
+            <TouchableOpacity onPress={props.apagar} >
+                <MaterialIcons name="delete" style={styles.deletarContato}/>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -14,7 +19,6 @@ export function ItemContato(props){
 const styles = StyleSheet.create({
      
     container:{
-        flex:1,
         height: 65,
         padding: 10,
         flexDirection: 'row',
@@ -30,6 +34,10 @@ const styles = StyleSheet.create({
       textContact:{
           fontSize: 18,
           fontWeight: 'bold'
+      },
+      deletarContato:{
+        fontSize:28,
+        color:"black"        
       }
    
   });

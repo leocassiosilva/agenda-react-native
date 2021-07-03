@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity , FlatList, ScrollView} from 'react-native';
 import { MyInput } from '../componentes/MyInput';
 import { ItemContato } from  '../componentes/ItemContato';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 export function Home(){
 
@@ -37,8 +38,8 @@ export function Home(){
   
         <View style={styles.conteudo}>
           <View style={styles.formContainer}>
-            <MyInput textInput="Informe seu nome" value={user} onChangeText={setUser} />
-            <MyInput textInput="Celular" value={phone} onChangeText={setPhone} keyboardType="numeric"/>
+            <MyInput iconName="user" textInput="Informe seu nome" value={user} onChangeText={setUser} />
+            <MyInput iconName="phone" textInput="Celular" value={phone} onChangeText={setPhone} keyboardType="numeric"/>
           </View>
           <TouchableOpacity style={styles.button} onPress={salvarContato} >
             <Text style={styles.textoButton}>Adicionar</Text>
@@ -52,7 +53,7 @@ export function Home(){
   
           <FlatList data={contatos}
             renderItem={ ({item}) =>  (
-              <ItemContato nome={ item.name } phone={item.phone}/>
+              <ItemContato nome={ item.name } phone={item.phone} apagar={ () => deletarContato (item.id)}/>
           ) }
           />
         </ScrollView>
@@ -92,7 +93,7 @@ export function Home(){
     },
   
     button:{
-      width:261,
+      width:241,
       height:45,
       backgroundColor:'#613EEA',
       borderRadius:6,
