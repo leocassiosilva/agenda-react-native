@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 export function ItemContato(props){ 
     
     return(
-        <View style={styles.container}>
+        <View style={styles.itemContainer}>
             <Text style={styles.textContact}>Nome: {props.nome}</Text>
             <Text>Telefone: {props.phone}</Text>
 
@@ -18,17 +18,18 @@ export function ItemContato(props){
 
 const styles = StyleSheet.create({
      
-    container:{
+    itemContainer:{
         height: 65,
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: '#F4F4F4',
-        borderWidth: 1,
-        borderColor: '#B6B4B4',
-        borderRadius: 10,
-        margin: 10,
+      padding: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: '#F4F4F4',
+      borderWidth: 1,
+      borderColor: '#B6B4B4',
+      borderRadius: 10,
+      margin: 10,
+      flexWrap:'wrap'
   
       },
       textContact:{
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
       },
       deletarContato:{
         fontSize:28,
-        color:"black"        
+        color:"black",        
       }
    
   });

@@ -48,15 +48,15 @@ export function Home(){
         
         <View  style={styles.lista}></View>
   
-        <ScrollView style={styles.contato}>
-          <Text style={styles.textoTituloContato}>Lista de Contatos</Text>
-  
-          <FlatList data={contatos}
-            renderItem={ ({item}) =>  (
-              <ItemContato nome={ item.name } phone={item.phone} apagar={ () => deletarContato (item.id)}/>
-          ) }
-          />
-        </ScrollView>
+          <ScrollView style={styles.contato}>
+            <Text style={styles.textoTituloContato}>Lista de Contatos</Text>
+    
+            <FlatList data={contatos}
+              renderItem={ ({item}) =>  (
+                <ItemContato nome={ item.name } phone={item.phone} apagar={ () => deletarContato (item.id)}/>
+            ) }
+            />
+          </ScrollView>
       </View>
     );
   }
@@ -96,7 +96,7 @@ export function Home(){
       width:241,
       height:45,
       backgroundColor:'#613EEA',
-      borderRadius:6,
+      borderRadius:7,
       alignItems:'center',
       justifyContent:'center'
     },
@@ -104,7 +104,7 @@ export function Home(){
     textoButton:{
       color:'#FFFFFF',
       fontWeight:'bold',
-      fontSize:18
+      fontSize:17
     },
   
   
@@ -121,6 +121,7 @@ export function Home(){
       fontSize:25,
       textAlign:'center',
       fontWeight:'bold',
+      marginTop:40
     }
   });
   
