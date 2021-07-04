@@ -107,7 +107,6 @@ export function Home(){
       fontSize:17
     },
   
-  
     lista:{
       width:'100%',
       height:7,
