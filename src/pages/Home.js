@@ -1,33 +1,66 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity , FlatList, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity , FlatList, ScrollView, Alert, Keyboard} from 'react-native';
+
 import { MyInput } from '../componentes/MyInput';
 import { ItemContato } from  '../componentes/ItemContato';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Home(){
+
+    const keyAsyncStorage = "@agenda2:contatos";
 
     const[user, setUser] = useState('');
     const[phone, setPhone] = useState(''); 
     const[contatos, setContatos] = useState([]);
   
   
-    function salvarContato(){
+    async function salvarContato(){
         const data = {
           id: String (new Date().getTime()), 
           name: user,
           phone:phone
         }
-        console.log("Seja Bem Vindo!");
-        console.log(data)
-        setContatos(oldValue => [...oldValue,data]); //Pega o valor antigo e o novo valor e vali colocando no vetor
-        setUser(""); // limpar os campos 
-        setPhone(""); // limpar os campos 
+        
+        const vetorData = [...contatos, data]; 
+
+        try {
+          await AsyncStorage.setItem(keyAsyncStorage, JSON.stringify(vetorData)); 
+        }catch(error){
+          Alert.alert("Erro  na gravação do contato");
+        }
+
+        Keyboard.dismiss();
+        setUser("");
+        setPhone("");
+        loadData(); 
     }
   
-    function deletarContato(id){
-      setContatos(contatos.filter(item => item.id != id))
+    async function deletarContato(id){
+      const newData = contatos.filter( item => item.id != id );
+        await AsyncStorage.setItem(keyAsyncStorage, JSON.stringify( newData ));
+      
+        setContatos(newData); 
+      
     }
+
+    async function loadData(){
+      try{
+          const retorno = await AsyncStorage.getItem(  keyAsyncStorage  );   
+          const teste = JSON.parse( retorno )
+          console.log( teste );
+          setContatos( teste || [] );
+      }catch(error){
+          Alert.alert("Erro na leitura dos dados");
+      }
+    }
+
+    useEffect( ()=>{
+      loadData();      
+    } , []);
+
+    
 
 
     return (
